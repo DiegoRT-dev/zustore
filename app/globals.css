@@ -1,26 +1,152 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*Eliminar luego*/
+
+body{
+    margin: 0;
+    padding: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+main {
+    min-height: 100vh;
+    transition: background 0.3 ease, color 0.3 ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+main.light {
+    background: #f4f4f4;
+    color: #222;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+main.dark {
+    background: #1a1a1a;
+    color: #eee;
+}
+
+/* ----- HEADER ----- */
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    margin-right: 3rem;
+}
+
+/* Botón del carrito en la esquina derecha */
+header button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.btnHeader {
+    position: absolute;
+  right: 1rem;
+  
+  display: flex;
+  gap: .5rem;
+}
+
+/* ----- PRODUCT GRID ----- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.product-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+main.dark .product-card {
+    background: #222;
+    border-color: #444;
+}
+
+/* ----- CART MODAL ----- */
+.cart-modal {
+  position: absolute;
+  top: 70px;
+  right: 1rem;
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  z-index: 999;
+}
+
+main.dark .cart-modal {
+  background: #222;
+  border-color: #555;
+}
+
+
+.qty-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cart-item {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+}
+
+.searchBar {
+    padding: 0.5rem;
+        width: 50%;
+        margin: 1rem 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+}
+
+.noProduct{
+    grid-column: 1/ -1;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.category{
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.formUser{
+  margin-bottom: 1rem;
+}
+
+.userInfo{
+  margin-bottom: 1rem;
+}
+
+.loading{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.statusMsg{
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  color: #111;
+}
+
+.statusBtn{
+  margin-left: 1rem;
 }

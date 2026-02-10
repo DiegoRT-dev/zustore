@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/.history
+/lib/generated/prisma
+
+
+# Prisma
+.prisma/                    # carpeta generada con cliente y migraciones locales
+prisma/dev.db               # si alguna vez usas SQLite para pruebas
+*.sqlite                    # cualquier base de datos SQLite local
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
