@@ -56,7 +56,7 @@ export default function ClientProductList({
             </p>
             <small>{p.categoria}</small>
             <button
-              className="bg-blue-950 text-white cursor-pointer"
+              className="bg-blue-950 text-white cursor-pointer py-3 rounded w-full"
               onClick={() => handleAdd(p)}
             >
               Agregar

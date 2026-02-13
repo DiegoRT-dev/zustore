@@ -20,7 +20,6 @@ export default function ClientWrapper({ children }: ClientWrapperProps) {
 
   return (
     <>
-      {/* Script para evitar FOUC (Flash of Unstyled Content) */}
       <script
         dangerouslySetInnerHTML={{
           __html: `

@@ -31,7 +31,18 @@ export function Cart() {
         </div>
       ))}
 
-      <h3>Total: ${total}</h3>
+      {/*<h3>Total: ${total}</h3>*/}
+
+      <button
+      onClick={() => {
+        if(cart.length === 0) return;
+        useCartStore.getState().clearCart();
+      }}
+      className="w-full cursor-pointer bg-green-600 text-white py-3 rounded"
+      disabled={cart.length === 0}
+      >
+        Finalizar Compra (${total})
+      </button>
     </div>
   );
 }

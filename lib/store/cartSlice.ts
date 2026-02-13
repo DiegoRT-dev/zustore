@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-import type { Product } from "@/mock/products";
+import type { Product } from "@prisma/client";
 
 export interface CartItem extends Product {
   cantidad: number;
@@ -15,6 +15,7 @@ interface CartState {
   removeFromCart: (id: number) => void;
   increaseQty: (id: number) => void;
   decreaseQty: (id: number) => void;
+  clearCart: () => void;
 
   total: () => number;
 }
@@ -65,12 +66,14 @@ export const useCartStore = create<CartState>()(
             .filter((item) => item.cantidad > 0),
         }),
 
+      clearCart: () => set({ cart: [] }),
+
       total: () =>
         get().cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0),
     }),
 
     { name: "cart-storage" }
   ),
-  { name: "CartStore "}
+  { name: "CartStore"}
   )
 );
