@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { useAppStore } from "@/lib/store/store";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
+    const router = useRouter();
+
     const login = useAppStore((s) => s.login);
 
     const [nombre, setNombre] = useState("");
@@ -18,7 +21,11 @@ export function LoginForm() {
 
         setNombre("");
         setEmail("");
+
+        router.push("/user")
     };
+
+    
 
     return (
         <form onSubmit={handleSubmit} className="formUser">

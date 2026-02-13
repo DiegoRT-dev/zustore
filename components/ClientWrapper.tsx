@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { GlobalLoader } from "@/components/GlobalLoader";
 import { StatusMessage } from "@/components/StatusMessage";
 import { Cart } from "@/components/Cart";
+import { UserModal } from "./UserModal";
 
 interface ClientWrapperProps {
   children: React.ReactNode;
@@ -14,9 +15,11 @@ interface ClientWrapperProps {
 
 export default function ClientWrapper({ children }: ClientWrapperProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenU, setIsOpenU] = useState(false);
   const theme = useAppStore((s) => s.theme);
 
   const toggleCart = () => setIsOpen((prev) => !prev);
+  const toggleUser = () => setIsOpenU((prev) => !prev);
 
   return (
     <>
@@ -37,13 +40,14 @@ export default function ClientWrapper({ children }: ClientWrapperProps) {
       />
 
       <main className={theme}>
-        <Header onToggleCart={toggleCart} />
+        <Header onToggleCart={toggleCart} onToggleUser={toggleUser} />
         <GlobalLoader />
         <StatusMessage />
 
         {children}
 
         {isOpen && <Cart />}
+        {isOpenU && <UserModal />}
       </main>
     </>
   );

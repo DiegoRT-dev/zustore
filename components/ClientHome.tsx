@@ -10,8 +10,8 @@ export default function ClientHome() {
 
   return (
     <>
-      {!isLogged ? <LoginForm /> : <UserInfo />}
-      <CategoryFilter />
+      {!isLogged ? <p>No estas logeado</p>: <UserInfo />}
+      
     </>
   );
 }
