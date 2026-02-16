@@ -1,10 +1,10 @@
 //Este la pagina del usuario
-import ClientHome from "@/components/ClientHome"
+import ClientUser from "@/components/ClientUser"
 
-export default function login() {
+export default function UserPage() {
     return(
     <div>
-        <ClientHome />
+        <ClientUser />
     </div>
     )
 }

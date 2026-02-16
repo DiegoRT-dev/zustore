@@ -35,11 +35,11 @@ header h1 {
     margin-right: 3rem;
 }
 
-/* Botón del carrito en la esquina derecha */
+/* Botón del carrito en la esquina derecha 
 header button {
   padding: 0.5rem 1rem;
   cursor: pointer;
-}
+}*/
 
 .btnHeader {
     position: absolute;

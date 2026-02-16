@@ -26,7 +26,7 @@ export const Header = ({ onToggleCart, onToggleUser }: HeaderProps) => {
   const showSearchBar = pathname === "/"
 
   return (
-    <header>
+    <header className="min-h-24">
       <Link href="/"><h1>Zustore</h1></Link>
       {showSearchBar && <SearchBar />}
       <div className="btnHeader">

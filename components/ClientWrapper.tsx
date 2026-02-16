@@ -47,7 +47,7 @@ export default function ClientWrapper({ children }: ClientWrapperProps) {
         {children}
 
         {isOpen && <Cart />}
-        {isOpenU && <UserModal />}
+        {isOpenU && <UserModal onClose={() => setIsOpenU(false)} />}
       </main>
     </>
   );
