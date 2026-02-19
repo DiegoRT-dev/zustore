@@ -22,7 +22,10 @@ export function UserModal({ onClose }: UserModalProps) {
   return (
     <div className="cart-modal">
         {!isLogged ? 
-        <Link href="/login" onClick={onClose}>Log in</Link> 
+        <div>
+        <Link href="/login" onClick={onClose}>Iniciar Sesion</Link> 
+        <Link href="/signup" onClick={onClose}>Registrarme</Link>
+        </div>
         : 
         <>
           <Link href="/user" onClick={onClose}>Usuario</Link>
