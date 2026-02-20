@@ -4,6 +4,7 @@ import { useCartStore } from "@/lib/store/cartSlice";
 import { useAppStore } from "@/lib/store/store";
 import { useMemo } from "react";
 import type { Product } from "@prisma/client";
+import Link from "next/link";
 
 interface ClientProductListProps {
   products: Product[];
@@ -38,7 +39,7 @@ export default function ClientProductList({
       setStatus("success");
     }, 1000);
   };
-  
+
   return (
     <div>
       <h2>Productos</h2>
@@ -77,6 +78,12 @@ export default function ClientProductList({
                   Agregar
                 </button>
               </div>
+              <Link
+                href={`/products/${p.id}`}
+                className="mt-3 block text-center text-blue-600 hover:underline"
+              >
+                Ver detalles
+              </Link>
             </div>
           </div>
         ))}
