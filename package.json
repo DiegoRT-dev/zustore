@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.3.0",
-    "@prisma/client": "^7.3.0",
+    "@prisma/client": "^7.4.1",
     "bcryptjs": "^3.0.3",
     "mysql2": "^3.16.3",
     "next": "16.1.6",
@@ -27,7 +27,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "prisma": "^7.3.0",
+    "prisma": "^7.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

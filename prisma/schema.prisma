@@ -12,6 +12,9 @@ model Product {
   nombre String
   precio Float
   categoria String
+  imagen String?
+  descripcion String?
+  stock Int @default(0)
 }
 
 model User {
