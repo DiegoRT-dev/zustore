@@ -23,17 +23,8 @@ main.dark {
 }
 
 /* ----- HEADER ----- */
-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #ddd;
-}
 
-header h1 {
-    margin-right: 3rem;
-}
+
 
 /* Botón del carrito en la esquina derecha 
 header button {

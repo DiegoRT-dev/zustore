@@ -26,8 +26,8 @@ export const Header = ({ onToggleCart, onToggleUser }: HeaderProps) => {
   const showSearchBar = pathname === "/"
 
   return (
-    <header className="min-h-24">
-      <Link href="/"><h1>Zustore</h1></Link>
+    <header className="flex relative items-center p-4 border-b border-gray-300 min-h-24">
+      <Link href="/"><h1 className="mr-12">Zustore</h1></Link>
       {showSearchBar && <SearchBar />}
       <div className="btnHeader">
         <button onClick={onToggleCart} className="cartBtn">Carrito ({count})</button>

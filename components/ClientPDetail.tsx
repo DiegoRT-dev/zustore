@@ -3,6 +3,8 @@
 import { useCartStore } from "@/lib/store/cartSlice";
 import { useAppStore } from "@/lib/store/store";
 import type { Product } from "@prisma/client";
+import Link from "next/link";
+import Image from "next/image";
 
 interface ClientPDetailProps {
   product: Product;
@@ -18,19 +20,22 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="min-h-screen py-12 px-4">
+      <div className="max-w-6xl mx-auto bg-transparent rounded-xl shadow-lg overflow-hidden">
         <div className="md:flex">
           <div className="md:w-1/2">
             <div className="relative w-full h-96 md:h-130 overflow-hidden">
               {product.imagen ? (
-                <img
+                <Image
                   src={product.imagen}
-                  alt={product.nombre}
+                  alt={product.nombre || "Producto"}
+                  fill
                   className="w-full h-96 md:h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "/placeholder.jpg";
-                  }}
+                  priority={false}
+                  quality={85}
+                  placeholder="blur"
+                blurDataURL="/placeholder.jpg" 
+                onError={() => console.log("Error cargando imagen:", product.imagen)}
                 />
               ) : (
                 <div className="w-full h-96 md:h-full bg-gray-200 flex items-center justify-center text-gray-500">
@@ -47,12 +52,12 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
             </p>
 
             {product.descripcion && (
-              <p className="text-gray-700 mb-6 text-lg">
+              <p className="text-gray-600 mb-6 text-lg">
                 {product.descripcion}
               </p>
             )}
 
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-500 mb-4">
               Categoría:{" "}
               <span className="font-medium">{product.categoria}</span>
             </p>
@@ -81,10 +86,11 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
             </button>
 
             <button
-              onClick={() => window.history.back()}
-              className="mt-4 w-full bg-gray-200 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition"
-            >
-              Volver a la tienda
+              className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition"
+            ><Link href="/">
+                Volver a la tienda
+            </Link>
+              
             </button>
           </div>
         </div>

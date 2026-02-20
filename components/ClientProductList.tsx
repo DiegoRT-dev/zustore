@@ -5,6 +5,7 @@ import { useAppStore } from "@/lib/store/store";
 import { useMemo } from "react";
 import type { Product } from "@prisma/client";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ClientProductListProps {
   products: Product[];
@@ -49,41 +50,45 @@ export default function ClientProductList({
             key={p.id}
             className="bg-transparent rounded-lg shadow-md overflow-hidden"
           >
-            {p.imagen ? (
-              <img
-                src={p.imagen}
-                alt={p.nombre || "Producto"}
-                className="w-full h-48 object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = "/placeholder.jpg";
-                  e.currentTarget.alt = "Imagen no disponible";
-                }}
-              />
-            ) : (
-              <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500 font-medium">
-                Sin imagen disponible
-              </div>
-            )}
+            <div className="relative w-full aspect-4/3 overflow-hidden">
+            <Link href={`/products/${p.id}`}>
+              {p.imagen ? (
+                <Image
+                  src={p.imagen}
+                  alt={p.nombre || "Producto"}
+                  fill
+                  className="object-cover"
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL="/placeholder.jpg"
+                onError={() => console.log("Error cargando imagen:", p.imagen)}
+                />
+              ) : (
+                <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500 font-medium">
+                  Sin imagen disponible
+                </div>
+              )}
+            </Link>
+            </div>
+            
 
             <div className="p-4">
-              <h3>{p.nombre}</h3>
-              <p>{p.categoria}</p>
-
-              <div className="flex justify-between items-center">
-                <p className="text-xl font-bold text-green-700">${p.precio}</p>
-                <button
-                  className="bg-blue-950 text-white px-4 py-2 rounded hover:bg-blue-900 transition"
-                  onClick={() => handleAdd(p)}
-                >
-                  Agregar
-                </button>
-              </div>
               <Link
                 href={`/products/${p.id}`}
-                className="mt-3 block text-center text-blue-600 hover:underline"
+                className="hover:underline hover:text-emerald-600"
               >
-                Ver detalles
+                <h3 className="text-xl">{p.nombre}</h3>
               </Link>
+
+              <p>{p.categoria}</p>
+              <p className="text-xl font-bold text-green-700">${p.precio}</p>
+
+              <button
+                className="bg-blue-950 text-white px-4 py-2 rounded hover:bg-blue-900 transition"
+                onClick={() => handleAdd(p)}
+              >
+                Agregar
+              </button>
             </div>
           </div>
         ))}
