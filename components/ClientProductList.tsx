@@ -18,6 +18,7 @@ export default function ClientProductList({
   const search = useAppStore((s) => s.search);
   const category = useAppStore((s) => s.category);
   const setStatus = useAppStore((s) => s.setStatus);
+  const cart = useCartStore((s) => s.cart);
 
   const theme = useAppStore((s) => s.theme);
 
@@ -32,8 +33,16 @@ export default function ClientProductList({
   }, [products, search, category]);
 
   const handleAdd = (product: Product) => {
+    const currentQtyInCart =
+      cart.find((item) => item.id === product.id)?.cantidad || 0;
+    const newQty = currentQtyInCart + 1;
+
+    if (newQty > product.stock) {
+      setStatus("warningCart");
+      return;
+    }
     add(product);
-    setStatus("success");
+    setStatus("successCart");
   };
 
   return (
@@ -44,73 +53,76 @@ export default function ClientProductList({
           gap-6 md:gap-8
         `}
       >
-        {filteredProducts.map((p) => (
-          <div
-            key={p.id}
-            className={`
+        {filteredProducts.map((p) => {
+          const qtyInCart =
+            cart.find((item) => item.id === p.id)?.cantidad || 0;
+          return (
+            <div
+              key={p.id}
+              className={`
               group bg-white dark:bg-gray-800 
               rounded-xl shadow-md overflow-hidden 
               transition-all duration-300 
               hover:shadow-xl hover:-translate-y-1
               border border-gray-200 dark:border-gray-700
             `}
-          >
-            <Link
-              href={`/products/${p.id}`}
-              className="block relative aspect-4/3 overflow-hidden"
             >
-              {p.imagen ? (
-                <Image
-                  src={p.imagen}
-                  alt={p.nombre || "Producto"}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  quality={75}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  placeholder="blur"
-                  blurDataURL="/placeholder.jpg"
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                  Sin imagen
-                </div>
-              )}
-            </Link>
-
-            <div className="p-5 flex flex-col">
               <Link
                 href={`/products/${p.id}`}
-                className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                className="block relative aspect-4/3 overflow-hidden"
               >
-                <h3 className="text-lg font-semibold line-clamp-2 mb-2">
-                  {p.nombre}
-                </h3>
+                {p.imagen ? (
+                  <Image
+                    src={p.imagen}
+                    alt={p.nombre || "Producto"}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    quality={75}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="/placeholder.jpg"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
+                    Sin imagen
+                  </div>
+                )}
               </Link>
 
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                {p.categoria}
-              </p>
-
-              <p className="text-sm mb-3">
-                Stock:{" "}
-                <span
-                  className={
-                    p.stock > 0
-                      ? "text-green-600 font-medium"
-                      : "text-red-600 font-medium"
-                  }
+              <div className="p-5 flex flex-col">
+                <Link
+                  href={`/products/${p.id}`}
+                  className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
-                  {p.stock > 0 ? p.stock : "Agotado"}
-                </span>
-              </p>
+                  <h3 className="text-lg font-semibold line-clamp-2 mb-2">
+                    {p.nombre}
+                  </h3>
+                </Link>
 
-              <div className="mt-auto flex items-center justify-between">
-                <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400">
-                  ${p.precio.toFixed(2)}
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  {p.categoria}
                 </p>
 
-                <button
-                  className={`
+                <p className="text-sm mb-3">
+                  Stock:{" "}
+                  <span
+                    className={
+                      p.stock > 0
+                        ? "text-green-600 font-medium"
+                        : "text-red-600 font-medium"
+                    }
+                  >
+                    {p.stock > 0 ? p.stock : "Agotado"}
+                  </span>
+                </p>
+
+                <div className="mt-auto flex items-center justify-between">
+                  <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400">
+                    ${p.precio.toFixed(2)}
+                  </p>
+
+                  <button
+                    className={`
                   px-5 py-2 rounded-lg font-medium text-white 
                   transition-colors duration-200
                   ${
@@ -119,15 +131,27 @@ export default function ClientProductList({
                       : "bg-blue-700 hover:bg-blue-800 active:bg-blue-900"
                   }
                 `}
-                  disabled={p.stock === 0}
-                  onClick={() => handleAdd(p)}
-                >
-                  {p.stock === 0 ? "Agotado" : "Agregar"}
-                </button>
+                    disabled={p.stock === 0}
+                    onClick={() => handleAdd(p)}
+                  >
+                    {p.stock === 0 ? (
+                      "Agotado"
+                    ) : (
+                      <>
+                        Agregar
+                        {qtyInCart > 0 && (
+                          <span className="bg-white text-blue-700 font-bold text-xs px-2 py-1 ml-1 rounded-full min-w-6 text-center">
+                            {qtyInCart}
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {filteredProducts.length === 0 && (

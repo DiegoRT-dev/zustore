@@ -1,6 +1,8 @@
 "use client";
 
 import { useCartStore } from "@/lib/store/cartSlice";
+import { useAppStore } from "@/lib/store/store";
+import { useRouter } from "next/navigation";
 
 interface CartProps {
   onClose: () => void;
@@ -13,6 +15,35 @@ export function Cart({ onClose }: CartProps) {
   const remove = useCartStore((s) => s.removeFromCart);
   const total = useCartStore((s) => s.total());
   const clearCart = useCartStore((s) => s.clearCart);
+  const setStatus = useAppStore((s) => s.setStatus);
+
+  const router = useRouter();
+
+  const handleFinalize = async () => {
+    if (cart.length === 0) return;
+
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "finalize",
+          cart: cart.map((item) => ({ id: item.id, cantidad: item.cantidad })),
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Error al finalizar");
+      }
+
+      clearCart();
+      setStatus("successBuy");
+      router.refresh();
+    } catch (err: any) {
+      setStatus("error");
+    }
+  };
 
   return (
     <div
@@ -93,10 +124,7 @@ export function Cart({ onClose }: CartProps) {
             </div>
 
             <button
-              onClick={() => {
-                if (cart.length === 0) return;
-                clearCart();
-              }}
+              onClick={handleFinalize}
               className={`
                 w-full py-4 rounded-lg font-bold text-lg
                 bg-green-600 hover:bg-green-700 text-white
