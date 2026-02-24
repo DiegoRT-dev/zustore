@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppStore } from "@/lib/store/store";
 
 import { Header } from "@/components/Header";
@@ -14,41 +14,47 @@ interface ClientWrapperProps {
 }
 
 export default function ClientWrapper({ children }: ClientWrapperProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenU, setIsOpenU] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
+
   const theme = useAppStore((s) => s.theme);
 
-  const toggleCart = () => setIsOpen((prev) => !prev);
-  const toggleUser = () => setIsOpenU((prev) => !prev);
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const toggleCart = () => {
+    setIsCartOpen((prev) => {
+      const newState = !prev;
+      if (newState) setIsUserOpen(false);
+      return newState;
+    });
+  };
+
+  const toggleUser = () => {
+    setIsUserOpen((prev) => {
+      const newState = !prev;
+      if (newState) setIsCartOpen(false);
+      return newState;
+    });
+  };
 
   return (
-    <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            try {
-              const saved = localStorage.getItem('app-storage');
-              if (saved) {
-                const theme = JSON.parse(saved).state?.theme || 'light';
-                if (theme === 'dark' || theme === 'light') {
-                  document.documentElement.classList.add(theme);
-                }
-              }
-            } catch (e) {}
-          `,
-        }}
-      />
+    <main className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out">
+      <Header onToggleCart={toggleCart} onToggleUser={toggleUser} />
+      <GlobalLoader />
+      <StatusMessage />
 
-      <main className={theme}>
-        <Header onToggleCart={toggleCart} onToggleUser={toggleUser} />
-        <GlobalLoader />
-        <StatusMessage />
-
+      <div className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
+      </div>
 
-        {isOpen && <Cart />}
-        {isOpenU && <UserModal onClose={() => setIsOpenU(false)} />}
-      </main>
-    </>
+      {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
+      {isUserOpen && <UserModal onClose={() => setIsUserOpen(false)} />}
+    </main>
   );
 }

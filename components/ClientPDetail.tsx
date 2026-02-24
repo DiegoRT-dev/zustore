@@ -12,11 +12,11 @@ interface ClientPDetailProps {
 
 export default function ClientPDetail({ product }: ClientPDetailProps) {
   const add = useCartStore((s) => s.addToCart);
-  const setLoading = useAppStore((s) => s.setLoading);
   const setStatus = useAppStore((s) => s.setStatus);
 
   const handleAdd = () => {
     add(product);
+    setStatus("success");
   };
 
   return (
@@ -34,8 +34,10 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
                   priority={false}
                   quality={85}
                   placeholder="blur"
-                blurDataURL="/placeholder.jpg" 
-                onError={() => console.log("Error cargando imagen:", product.imagen)}
+                  blurDataURL="/placeholder.jpg"
+                  onError={() =>
+                    console.log("Error cargando imagen:", product.imagen)
+                  }
                 />
               ) : (
                 <div className="w-full h-96 md:h-full bg-gray-200 flex items-center justify-center text-gray-500">
@@ -85,12 +87,8 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
               {product.stock === 0 ? "Agotado" : "Agregar al carrito"}
             </button>
 
-            <button
-              className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition"
-            ><Link href="/">
-                Volver a la tienda
-            </Link>
-              
+            <button className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition">
+              <Link href="/">Volver a la tienda</Link>
             </button>
           </div>
         </div>

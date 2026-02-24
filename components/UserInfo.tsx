@@ -4,21 +4,108 @@ import { useAppStore } from "@/lib/store/store";
 import { useRouter } from "next/navigation";
 
 export function UserInfo() {
-    const nombre = useAppStore((s) => s.nombre);
-    const email = useAppStore((s) => s.email);
-    const logout = useAppStore((s) => s.logout);
-    const router = useRouter();
+  const nombre = useAppStore((s) => s.nombre);
+  const email = useAppStore((s) => s.email);
+  const logout = useAppStore((s) => s.logout);
+  const router = useRouter();
 
-    const handleLogOut = () => {
-        logout();
-        router.push("/");
-    }
+  const handleLogOut = () => {
+    logout();
+    router.replace("/");
+  };
 
-    return (
-        <div className="userInfo">
-            <p>Sesion iniciada como <strong>{nombre}</strong></p>
-            <p>{email}</p>
-            <button onClick={handleLogOut}>Cerrar Sesion</button>
+  return (
+    <div className="w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-16 h-16 rounded-full bg-emerald-600 dark:bg-emerald-500 flex items-center justify-center text-white text-2xl font-bold">
+          {nombre?.charAt(0)?.toUpperCase() || "?"}
         </div>
-    );
+
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            ¡Hola, {nombre}!
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{email}</p>
+        </div>
+      </div>
+
+      <div className="space-y-6 mb-10">
+        <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+          <span>{email}</span>
+        </div>
+
+        <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>Miembro desde {new Date().toLocaleDateString()}</span>
+        </div>
+      </div>
+
+      <button
+        onClick={handleLogOut}
+        className={`
+          w-full py-4 rounded-lg font-bold text-lg
+          bg-red-600 hover:bg-red-700 active:bg-red-800 
+          text-white 
+          transition-colors duration-200
+          shadow-md hover:shadow-lg
+          flex items-center justify-center gap-2
+        `}
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+          />
+        </svg>
+        Cerrar Sesión
+      </button>
+
+      <div className="mt-6 grid grid-cols-2 gap-4">
+        <button
+          className="py-3 px-4 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+          disabled
+        >
+          Mis Compras
+        </button>
+        <button
+          className="py-3 px-4 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+          disabled
+        >
+          Configuración
+        </button>
+      </div>
+    </div>
+  );
 }

@@ -17,8 +17,9 @@ export default function ClientProductList({
   const add = useCartStore((s) => s.addToCart);
   const search = useAppStore((s) => s.search);
   const category = useAppStore((s) => s.category);
-  const setLoading = useAppStore((s) => s.setLoading);
   const setStatus = useAppStore((s) => s.setStatus);
+
+  const theme = useAppStore((s) => s.theme);
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
@@ -31,72 +32,109 @@ export default function ClientProductList({
   }, [products, search, category]);
 
   const handleAdd = (product: Product) => {
-    setLoading(true);
-    setStatus("idle");
-
-    setTimeout(() => {
-      add(product);
-      setLoading(false);
-      setStatus("success");
-    }, 1000);
+    add(product);
+    setStatus("success");
   };
 
   return (
-    <div>
-      <h2>Productos</h2>
-      <div className="product-grid">
+    <div className="py-8 px-4">
+      <div
+        className={`
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+          gap-6 md:gap-8
+        `}
+      >
         {filteredProducts.map((p) => (
           <div
             key={p.id}
-            className="bg-transparent rounded-lg shadow-md overflow-hidden"
+            className={`
+              group bg-white dark:bg-gray-800 
+              rounded-xl shadow-md overflow-hidden 
+              transition-all duration-300 
+              hover:shadow-xl hover:-translate-y-1
+              border border-gray-200 dark:border-gray-700
+            `}
           >
-            <div className="relative w-full aspect-4/3 overflow-hidden">
-            <Link href={`/products/${p.id}`}>
+            <Link
+              href={`/products/${p.id}`}
+              className="block relative aspect-4/3 overflow-hidden"
+            >
               {p.imagen ? (
                 <Image
                   src={p.imagen}
                   alt={p.nombre || "Producto"}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   quality={75}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   placeholder="blur"
                   blurDataURL="/placeholder.jpg"
-                onError={() => console.log("Error cargando imagen:", p.imagen)}
                 />
               ) : (
-                <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500 font-medium">
-                  Sin imagen disponible
+                <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
+                  Sin imagen
                 </div>
               )}
             </Link>
-            </div>
-            
 
-            <div className="p-4">
+            <div className="p-5 flex flex-col">
               <Link
                 href={`/products/${p.id}`}
-                className="hover:underline hover:text-emerald-600"
+                className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
               >
-                <h3 className="text-xl">{p.nombre}</h3>
+                <h3 className="text-lg font-semibold line-clamp-2 mb-2">
+                  {p.nombre}
+                </h3>
               </Link>
 
-              <p>{p.categoria}</p>
-              <p className="text-xl font-bold text-green-700">${p.precio}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                {p.categoria}
+              </p>
 
-              <button
-                className="bg-blue-950 text-white px-4 py-2 rounded hover:bg-blue-900 transition"
-                onClick={() => handleAdd(p)}
-              >
-                Agregar
-              </button>
+              <p className="text-sm mb-3">
+                Stock:{" "}
+                <span
+                  className={
+                    p.stock > 0
+                      ? "text-green-600 font-medium"
+                      : "text-red-600 font-medium"
+                  }
+                >
+                  {p.stock > 0 ? p.stock : "Agotado"}
+                </span>
+              </p>
+
+              <div className="mt-auto flex items-center justify-between">
+                <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400">
+                  ${p.precio.toFixed(2)}
+                </p>
+
+                <button
+                  className={`
+                  px-5 py-2 rounded-lg font-medium text-white 
+                  transition-colors duration-200
+                  ${
+                    p.stock === 0
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-blue-700 hover:bg-blue-800 active:bg-blue-900"
+                  }
+                `}
+                  disabled={p.stock === 0}
+                  onClick={() => handleAdd(p)}
+                >
+                  {p.stock === 0 ? "Agotado" : "Agregar"}
+                </button>
+              </div>
             </div>
           </div>
         ))}
-
-        {filteredProducts.length === 0 && (
-          <p className="noProduct">No se encontró producto</p>
-        )}
       </div>
+
+      {filteredProducts.length === 0 && (
+        <div className="text-center py-16 text-gray-500 dark:text-gray-400 text-xl font-medium">
+          No se encontró ningún producto
+        </div>
+      )}
     </div>
   );
 }
