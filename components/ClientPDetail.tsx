@@ -13,11 +13,14 @@ interface ClientPDetailProps {
 export default function ClientPDetail({ product }: ClientPDetailProps) {
   const add = useCartStore((s) => s.addToCart);
   const setStatus = useAppStore((s) => s.setStatus);
+  const cart = useCartStore((s) => s.cart);
 
   const handleAdd = () => {
     add(product);
-    setStatus("success");
+    setStatus("successCart");
   };
+
+  const qtyInCart = cart.find((item) => item.id === product.id)?.cantidad || 0;
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -84,7 +87,18 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
               disabled={product.stock === 0}
               onClick={handleAdd}
             >
-              {product.stock === 0 ? "Agotado" : "Agregar al carrito"}
+              {product.stock === 0 ? (
+                      "Agotado"
+                    ) : (
+                      <>
+                        Agregar
+                        {qtyInCart > 0 && (
+                          <span className="bg-white text-blue-700 font-bold text-xs px-2 py-1 ml-1 rounded-full min-w-6 text-center">
+                            {qtyInCart}
+                          </span>
+                        )}
+                      </>
+                    )}
             </button>
 
             <button className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition">
