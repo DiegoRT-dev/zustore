@@ -88,17 +88,17 @@ export default function ClientPDetail({ product }: ClientPDetailProps) {
               onClick={handleAdd}
             >
               {product.stock === 0 ? (
-                      "Agotado"
-                    ) : (
-                      <>
-                        Agregar
-                        {qtyInCart > 0 && (
-                          <span className="bg-white text-blue-700 font-bold text-xs px-2 py-1 ml-1 rounded-full min-w-6 text-center">
-                            {qtyInCart}
-                          </span>
-                        )}
-                      </>
-                    )}
+                "Agotado"
+              ) : (
+                <>
+                  Agregar
+                  {qtyInCart > 0 && (
+                    <span className="bg-white text-blue-700 font-bold text-xs px-2 py-1 ml-1 rounded-full min-w-6 text-center">
+                      {qtyInCart}
+                    </span>
+                  )}
+                </>
+              )}
             </button>
 
             <button className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition">

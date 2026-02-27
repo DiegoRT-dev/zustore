@@ -103,13 +103,7 @@ export function StatusMessage() {
 
   return (
     <div
-      className={`
-      fixed bottom-4 right-4 z-50
-      flex items-center gap-3 px-6 py-4 
-      ${bgColor} border-l-4 rounded-lg shadow-lg
-      max-w-sm animate-slide-in
-      transition-all duration-300 ease-in-out
-    `}
+      className={`fixed bottom-4 right-4 z-50 flex items-center gap-3 px-6 py-4 ${bgColor} border-l-4 rounded-lg shadow-lg max-w-sm animate-slide-in transition-all duration-300 ease-in-out`}
     >
       {icon}
 
@@ -131,11 +125,7 @@ export function StatusMessage() {
 
       <button
         onClick={() => setStatus("idle")}
-        className={`
-        ml-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 
-        text-xl font-bold leading-none
-        transition-colors
-      `}
+        className={`ml-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-xl font-bold leading-none transition-colors`}
       >
         ×
       </button>

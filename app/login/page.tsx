@@ -1,10 +1,9 @@
-//Este es el login
-import { LoginForm } from "@/components/LoginForm"
+import { LoginForm } from "@/components/LoginForm";
 
 export default function LoginPage() {
-    return(
+  return (
     <div>
-        <LoginForm />
+      <LoginForm />
     </div>
-    )
+  );
 }

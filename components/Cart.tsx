@@ -65,9 +65,7 @@ export function Cart({ onClose }: CartProps) {
   };
 
   return (
-    <div
-      className={`fixed top-20 right-4 z-50 w-80 sm:w-96 max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl transition-all duration-300 ease-in-out`}
-    >
+    <div className="fixed top-20 right-4 z-50 w-[calc(100%-2rem)] sm:w-96 max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl transition-all duration-300 ease-in-out">
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">

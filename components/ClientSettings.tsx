@@ -107,7 +107,7 @@ export default function ClientSetting() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Nombre
             </label>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="text"
                 value={nombre}
@@ -117,7 +117,7 @@ export default function ClientSetting() {
               <button
                 onClick={() => handleUpdate("nombre", nombre)}
                 disabled={loading || nombre === currentNombre}
-                className="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 transition"
+                className="px-4 py-3 sm:px-6 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 transition"
               >
                 Guardar
               </button>
@@ -128,7 +128,7 @@ export default function ClientSetting() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Email
             </label>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
                 value={email}
@@ -138,7 +138,7 @@ export default function ClientSetting() {
               <button
                 onClick={() => handleUpdate("email", email)}
                 disabled={loading || email === currentEmail}
-                className="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 transition"
+                className="px-4 py-3 sm:px-6 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 transition"
               >
                 Guardar
               </button>

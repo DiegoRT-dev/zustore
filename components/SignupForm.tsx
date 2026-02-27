@@ -152,14 +152,7 @@ export function SignupForm() {
       <button
         type="submit"
         disabled={loading}
-        className={`
-          w-full mt-8 py-4 rounded-lg font-bold text-lg
-          bg-green-600 hover:bg-green-700 active:bg-green-800 
-          text-white 
-          transition-colors duration-200
-          disabled:opacity-50 disabled:cursor-not-allowed
-          shadow-md hover:shadow-lg
-        `}
+        className={`w-full mt-8 py-4 rounded-lg font-bold text-lg bg-green-600 hover:bg-green-700 active:bg-green-800 text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg`}
       >
         {loading ? "Creando cuenta..." : "Registrarse"}
       </button>

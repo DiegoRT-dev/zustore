@@ -1,4 +1,3 @@
-//Este es el home
 import { Suspense } from "react";
 import ProductList from "@/components/ProductList";
 import { CategoryFilter } from "@/components/CategoryFilter";

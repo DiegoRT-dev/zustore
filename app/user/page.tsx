@@ -1,10 +1,9 @@
-//Este la pagina del usuario
-import ClientUser from "@/components/ClientUser"
+import ClientUser from "@/components/ClientUser";
 
 export default function UserPage() {
-    return(
+  return (
     <div>
-        <ClientUser />
+      <ClientUser />
     </div>
-    )
+  );
 }

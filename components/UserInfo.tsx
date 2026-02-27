@@ -86,14 +86,7 @@ export function UserInfo() {
 
       <button
         onClick={handleLogOut}
-        className={`
-          w-full py-4 rounded-lg font-bold text-lg
-          bg-red-600 hover:bg-red-700 active:bg-red-800 
-          text-white 
-          transition-colors duration-200
-          shadow-md hover:shadow-lg
-          flex items-center justify-center gap-2
-        `}
+        className={`w-full py-4 rounded-lg font-bold text-lg bg-red-600 hover:bg-red-700 active:bg-red-800 text-white transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
       >
         <svg
           className="w-5 h-5"
@@ -114,14 +107,7 @@ export function UserInfo() {
       <div className="mt-6 grid grid-cols-2 gap-4">
         <button
           onClick={handlePurchases}
-          className={`
-      py-3 px-4 rounded-lg font-medium
-      bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 
-      text-white 
-      transition-colors duration-200
-      shadow-md hover:shadow-lg
-      flex items-center justify-center gap-2
-    `}
+          className={`py-3 px-4 rounded-lg font-medium bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
         >
           <svg
             className="w-5 h-5"
@@ -140,14 +126,7 @@ export function UserInfo() {
         </button>
         <button
           onClick={handleSettings}
-          className={`
-      py-3 px-4 rounded-lg font-medium
-      bg-gray-600 hover:bg-gray-700 active:bg-gray-800 
-      text-white 
-      transition-colors duration-200
-      shadow-md hover:shadow-lg
-      flex items-center justify-center gap-2
-    `}
+          className={`py-3 px-4 rounded-lg font-medium bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
         >
           <svg
             className="w-5 h-5"

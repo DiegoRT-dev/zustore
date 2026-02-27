@@ -44,12 +44,12 @@ export default function ClientWrapper({ children }: ClientWrapperProps) {
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out">
+    <main className="min-h-screen flex flex-col overflow-x-hidden bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out">
       <Header onToggleCart={toggleCart} onToggleUser={toggleUser} />
       <GlobalLoader />
       <StatusMessage />
 
-      <div className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </div>
 

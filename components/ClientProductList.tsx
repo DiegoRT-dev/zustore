@@ -48,10 +48,7 @@ export default function ClientProductList({
   return (
     <div className="py-8 px-4">
       <div
-        className={`
-          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
-          gap-6 md:gap-8
-        `}
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8`}
       >
         {filteredProducts.map((p) => {
           const qtyInCart =
@@ -59,13 +56,7 @@ export default function ClientProductList({
           return (
             <div
               key={p.id}
-              className={`
-              group bg-white dark:bg-gray-800 
-              rounded-xl shadow-md overflow-hidden 
-              transition-all duration-300 
-              hover:shadow-xl hover:-translate-y-1
-              border border-gray-200 dark:border-gray-700
-            `}
+              className={`group bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-200 dark:border-gray-700`}
             >
               <Link
                 href={`/products/${p.id}`}
@@ -122,9 +113,7 @@ export default function ClientProductList({
                   </p>
 
                   <button
-                    className={`
-                  px-5 py-2 rounded-lg font-medium text-white 
-                  transition-colors duration-200
+                    className={`px-5 py-2 rounded-lg font-medium text-white transition-colors duration-200
                   ${
                     p.stock === 0
                       ? "bg-gray-400 cursor-not-allowed"

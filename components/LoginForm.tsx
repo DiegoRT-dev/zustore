@@ -77,17 +77,7 @@ export function LoginForm() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={`
-            w-full px-5 py-4 
-            bg-gray-50 dark:bg-gray-900 
-            border border-gray-300 dark:border-gray-600 
-            rounded-lg 
-            text-gray-900 dark:text-gray-100 
-            placeholder-gray-500 dark:placeholder-gray-400 
-            focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 
-            focus:border-transparent 
-            transition-all duration-200
-          `}
+          className={`w-full px-5 py-4 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200`}
           required
         />
       </div>
@@ -98,17 +88,7 @@ export function LoginForm() {
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className={`
-            w-full px-5 py-4 
-            bg-gray-50 dark:bg-gray-900 
-            border border-gray-300 dark:border-gray-600 
-            rounded-lg 
-            text-gray-900 dark:text-gray-100 
-            placeholder-gray-500 dark:placeholder-gray-400 
-            focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 
-            focus:border-transparent 
-            transition-all duration-200
-          `}
+          className={`w-full px-5 py-4 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200`}
           required
         />
       </div>
@@ -116,14 +96,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className={`
-          w-full py-4 rounded-lg font-bold text-lg
-          bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
-          text-white 
-          transition-colors duration-200
-          disabled:opacity-50 disabled:cursor-not-allowed
-          shadow-md hover:shadow-lg
-        `}
+        className={`w-full py-4 rounded-lg font-bold text-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg`}
       >
         {loading ? "Iniciando..." : "Iniciar Sesión"}
       </button>
