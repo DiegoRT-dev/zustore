@@ -20,6 +20,10 @@ export function CategoryFilter() {
         <option value="Computo">Computo</option>
         <option value="Accesorios">Accesorios</option>
         <option value="Audio">Audio</option>
+        <option value="Almacenamiento">Almacenamiento</option>
+        <option value="Componentes">Componentes</option>
+        <option value="Redes">Redes</option>
+        <option value="Sillas">Sillas</option>
       </select>
 
       <button
