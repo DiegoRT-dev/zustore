@@ -16,11 +16,28 @@ export function Cart({ onClose }: CartProps) {
   const total = useCartStore((s) => s.total());
   const clearCart = useCartStore((s) => s.clearCart);
   const setStatus = useAppStore((s) => s.setStatus);
+  const isLogged = useAppStore((s) => s.logged);
 
   const router = useRouter();
 
   const handleFinalize = async () => {
-    if (cart.length === 0) return;
+    const currentState = useAppStore.getState();
+    const currentUserId = currentState.id;
+
+    if (cart.length === 0) {
+      return;
+    }
+
+    if (
+      !currentState.logged ||
+      currentUserId === null ||
+      isNaN(currentUserId) ||
+      currentUserId <= 0
+    ) {
+      setStatus("warningUser");
+      router.push("/login");
+      return;
+    }
 
     try {
       const res = await fetch("/api/cart", {
@@ -29,19 +46,21 @@ export function Cart({ onClose }: CartProps) {
         body: JSON.stringify({
           action: "finalize",
           cart: cart.map((item) => ({ id: item.id, cantidad: item.cantidad })),
+          userId: currentUserId,
         }),
       });
+
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Error al finalizar");
+        throw new Error(data.error || "Error al finalizar la compra");
       }
 
       clearCart();
       setStatus("successBuy");
       router.refresh();
     } catch (err: any) {
-      setStatus("error");
+      setStatus("errorCart");
     }
   };
 
@@ -125,12 +144,7 @@ export function Cart({ onClose }: CartProps) {
 
             <button
               onClick={handleFinalize}
-              className={`
-                w-full py-4 rounded-lg font-bold text-lg
-                bg-green-600 hover:bg-green-700 text-white
-                transition-colors duration-200
-                disabled:opacity-50 disabled:cursor-not-allowed
-              `}
+              className={`w-full py-4 rounded-lg font-bold text-lg bg-green-600 hover:bg-green-700 text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed`}
               disabled={cart.length === 0}
             >
               Finalizar Compra (${total.toFixed(2)})

@@ -1,32 +1,34 @@
 import { type StateCreator } from "zustand";
 
 export interface UserState {
-    nombre: string;
-    email: string;
-    logged: boolean;
+  id: number | null;
+  nombre: string;
+  email: string;
+  logged: boolean;
 
-    login: (nombre: string, email: string) => void;
-    logout: () => void;
-
+  login: (id: number, nombre: string, email: string) => void;
+  logout: () => void;
 }
 
-export const createUserSlice: StateCreator<UserState> = (set, get) => ({
-    nombre: "",
-    email: "",
-    logged: false,
+export const createUserSlice: StateCreator<UserState> = (set) => ({
+  id: null,
+  nombre: "",
+  email: "",
+  logged: false,
 
-    login: (nombre, email) =>
-        set({
-            nombre,
-            email,
-            logged: true
-        }),
-        
-    logout: () =>
-        set({
-            nombre: "",
-            email: "",
-            logged: false
-        }),
+  login: (id, nombre, email) =>
+    set({
+      id,
+      nombre,
+      email,
+      logged: true,
+    }),
 
+  logout: () =>
+    set({
+      id: null,
+      nombre: "",
+      email: "",
+      logged: false,
+    }),
 });

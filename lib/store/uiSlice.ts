@@ -8,7 +8,8 @@ export interface UIState {
     | "successBuy"
     | "error"
     | "errorCart"
-    | "warningCart";
+    | "warningCart"
+    | "warningUser";
 
   setLoading: (value: boolean) => void;
   setStatus: (value: UIState["status"]) => void;

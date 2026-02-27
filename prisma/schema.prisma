@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,19 +7,29 @@ datasource db {
 }
 
 model Product {
-  id Int @id @default(autoincrement())
-  nombre String
-  precio Float
-  categoria String
-  imagen String?
+  id          Int     @id @default(autoincrement())
+  nombre      String
+  precio      Float
+  categoria   String
+  imagen      String?
   descripcion String?
-  stock Int @default(0)
+  stock       Int     @default(0)
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  nombre String
-  email String @unique
-  password String
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  purchases Purchase[]
+}
+
+model Purchase {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  items     Json
+  total     Float
   createdAt DateTime @default(now())
 }

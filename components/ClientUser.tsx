@@ -11,15 +11,7 @@ export default function ClientUser() {
     <div>
       {!isLogged ? (
         <div className="min-h-[60vh] flex items-center justify-center px-4">
-          <div
-            className="
-      w-full max-w-md p-10 
-      bg-white dark:bg-gray-800 
-      rounded-2xl shadow-xl 
-      border border-gray-200 dark:border-gray-700
-      text-center transition-all duration-300
-    "
-          >
+          <div className="w-full max-w-md p-10 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 text-center transition-all duration-300">
             <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
               No estás logueado
             </h1>
@@ -30,15 +22,7 @@ export default function ClientUser() {
 
             <Link
               href="/login"
-              className="
-          inline-block w-full max-w-xs mx-auto 
-          py-4 px-8 
-          bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
-          text-white font-bold text-lg 
-          rounded-lg 
-          transition-all duration-200
-          shadow-md hover:shadow-lg
-        "
+              className="inline-block w-full max-w-xs mx-auto py-4 px-8 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-lg rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
             >
               Iniciar Sesión
             </Link>

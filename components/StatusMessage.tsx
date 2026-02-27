@@ -19,14 +19,12 @@ export function StatusMessage() {
 
   if (status === "idle") return null;
 
-  // ... resto igual ...
-
   const isSuccess = status === "successCart" || status === "successBuy";
-  const isWarning = status === "warningCart";
+  const isWarning = status === "warningCart" || status === "warningUser";
   const isError = status === "error" || status === "errorCart";
 
   let bgColor =
-    "bg-blue-100 dark:bg-blue-900/30 border-blue-500 dark:border-blue-600"; // fallback info
+    "bg-blue-100 dark:bg-blue-900/30 border-blue-500 dark:border-blue-600";
   let textColor = "text-blue-800 dark:text-blue-200";
   let icon = (
     <svg
@@ -125,7 +123,9 @@ export function StatusMessage() {
                 ? "Error al agregar al carrito"
                 : status === "warningCart"
                   ? "Stock insuficiente"
-                  : "Ocurrió un error"}
+                  : status === "warningUser"
+                    ? "Inicia Sesion"
+                    : "Ocurrió un error"}
         </p>
       </div>
 

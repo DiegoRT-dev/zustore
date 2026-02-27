@@ -43,7 +43,7 @@ export function LoginForm() {
         throw new Error(data.error || "Error al iniciar sesion");
       }
 
-      login(data.user.nombre, data.user.email);
+      login(Number(data.user.id), data.user.nombre, data.user.email);
 
       setEmail("");
       setPassword("");
@@ -59,13 +59,7 @@ export function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className={`
-        w-full max-w-md mx-auto p-10 
-        bg-white dark:bg-gray-800 
-        rounded-2xl shadow-xl 
-        border border-gray-200 dark:border-gray-700
-        transition-all duration-300
-      `}
+      className={`w-full max-w-md mx-auto p-10 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300`}
     >
       <h3 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
         Iniciar Sesión
