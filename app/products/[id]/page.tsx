@@ -1,15 +1,13 @@
 import ClientPDetail from "@/components/ClientPDetail";
 import { notFound } from "next/navigation";
 import type { Product } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 async function fetchProduct(id: number): Promise<Product | null> {
   try {
-    const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-      cache: "no-store",
+    return await prisma.product.findUnique({
+      where: { id },
     });
-
-    if (!res.ok) return null;
-    return await res.json();
   } catch (error) {
     console.error("Error fetching product:", error);
     return null;
