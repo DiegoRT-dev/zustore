@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zustore
 
-## Getting Started
+Una tienda online moderna construida con **Next.js 16, Prisma, MySQL y Zustand**, con autenticación, carrito persistente y soporte dark mode.
 
-First, run the development server:
+## Demo 
+Prueba la aplicación aquí:
+https://zustore-y1tz.vercel.app/
+
+## Características principales
+
+- Catálogo de productos con filtro por búsqueda y categoría
+- Detalle de producto
+- Carrito de compras (persistente en localStorage)
+- Autenticación (login / registro)
+- Página de perfil con historial de compras
+- Cambio de tema claro/oscuro (persistente)
+- Mensajes de éxito/error (toasts)
+- Loader global y estados de carga
+- Responsive y mobile-first
+- Dark mode completo
+
+## Tecnologías utilizadas
+
+- **Framework**: Next.js 16
+- **Estilos**: Tailwind CSS + dark mode
+- **Base de datos**: MySQL (MariaDB) + Prisma
+- **Estado global**: Zustand + persist (localStorage)
+- **Autenticación**: Formulario básico + API route
+- **Imágenes**: Next/Image con optimización
+
+## Deploy
+
+La aplicación está desplegada usando:
+
+- **Frontend:** Vercel
+- **Base de datos:** Railway (MySQL/MariaDB)
+- **ORM:** Prisma
+
+## Instalación y ejecución local
+
+1. Clona el repositorio
+
+```bash
+git clone https://github.com/DiegoRT-dev/zustore.git
+cd zustore
+```
+
+2. Instala dependencias
+
+```bash
+npm install
+# o
+pnpm install
+# o
+yarn install
+```
+
+3. Configura la base de datos
+
+Crea un archivo .env en la raíz del proyecto con:
+
+```bash
+DATABASE_URL="mysql://USUARIO:CONTRASEÑA@localhost:3306/zustore"
+```
+
+4. Genera y aplica la base de datos
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+5. (Opcional) Agrega datos de prueba
+
+```bash
+npx prisma studio   # abre el editor visual
+# o ejecuta un seed si tienes uno
+```
+
+6. Ejecuta la aplicación
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
+# o
 pnpm dev
-# or
-bun dev
+# o
+yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Capturas de pantalla
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Página principal
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Pagina Principal](public/screenshots/home-light.png)
 
-## Learn More
+Página principal con cuenta
 
-To learn more about Next.js, take a look at the following resources:
+![Pagina Principal Cuenta](public/screenshots/home-dark-user.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Página del usuario
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Pagina Usuario](public/screenshots/user-page.png)
 
-## Deploy on Vercel
+Filtro
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Filtro](public/screenshots/filter.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Busqueda
+
+![Busqueda](public/screenshots/search.png)
+
+Carrito
+
+![Carrito](public/screenshots/cart.png)
+
+## Estructura del proyecto
+
+```bash
+app/
+├── api/               # Rutas API (auth, cart, purchases, user/update)
+├── login/             # Página para inicio de sesión
+├── products/          # Página de detalle de producto
+├── purchases/         # Historial de compras (protegida)
+├── settings/          # Configuración de usuario
+├── signup/            # Página registro
+├── user/              # Página del usuario
+components/            # Componentes reutilizables (Header, Cart, UserModal, Footer, etc.)
+lib/
+├── store/             # Zustand slices (user, theme, ui, cart, purchases, etc.)
+prisma/                # schema.prisma + migrations
+public/                # Imágenes estáticas, placeholder.jpg
+```
+
+## Funcionalidades clave
+
+- Tema claro/oscuro persistente
+- Carrito con cantidades, eliminación y total
+- Autenticación (login / registro)
+- Perfil con logout y configuración
+- Compras guardadas por usuario
+- Validación de stock al finalizar compra
+- Toasts para feedback (éxito, error, advertencia)
+
+## Próximas mejoras / ideas
+
+- Checkout real con pago simulado
+- Panel de administración (agregar/editar productos)
+- Búsqueda avanzada + paginación
+- Favoritos / lista de deseos
+- Notificaciones por email
+- Imágenes de productos en carrito y compras
+
+## Contribuciones
+
+¡Las contribuciones son bienvenidas! Si encuentras un bug o tienes una idea para mejorar la app, abre un issue o un pull request.
+
+## Licencia
+
+MIT License - siéntete libre de usar, modificar y compartir este proyecto.
+Creado por DiegoRT-dev
+
+¡Gracias por visitar!
