@@ -1,7 +1,7 @@
 import ClientPDetail from "@/components/ClientPDetail";
 import { notFound } from "next/navigation";
 import type { Product } from "@prisma/client";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 async function fetchProduct(id: number): Promise<Product | null> {
   try {
