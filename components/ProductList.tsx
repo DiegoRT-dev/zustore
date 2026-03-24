@@ -1,6 +1,6 @@
 import ClientProductList from "./ClientProductList";
 import type { Product } from "@prisma/client";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 async function fetchProducts(): Promise<Product[]> {
   try {
