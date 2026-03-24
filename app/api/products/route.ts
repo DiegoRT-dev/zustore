@@ -8,7 +8,9 @@ export async function GET() {
   } catch (error) {
     console.error("Error en GET /api/products:", error);
     return NextResponse.json(
-      { error: "Error al obtener los productos" },
+      { error: "Error al obtener los productos",
+       detail: String(error)
+      },
       { status: 500 },
     );
   }
