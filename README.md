@@ -1,6 +1,6 @@
 # Zustore
 
-Una tienda online moderna construida con **Next.js 16, Prisma, MySQL y Zustand**, con autenticación, carrito persistente y soporte dark mode.
+Una tienda online moderna construida con **Next.js 16, Prisma, PostgreSQL (Supabase) y Zustand**, con autenticación, carrito persistente y soporte dark mode.
 
 ## Demo 
 Prueba la aplicación aquí:
@@ -23,7 +23,7 @@ https://zustore-y1tz.vercel.app/
 
 - **Framework**: Next.js 16
 - **Estilos**: Tailwind CSS + dark mode
-- **Base de datos**: MySQL (MariaDB) + Prisma
+- **Base de datos**: PostgreSQL (Supabase) + Prisma
 - **Estado global**: Zustand + persist (localStorage)
 - **Autenticación**: Formulario básico + API route
 - **Imágenes**: Next/Image con optimización
@@ -33,7 +33,7 @@ https://zustore-y1tz.vercel.app/
 La aplicación está desplegada usando:
 
 - **Frontend:** Vercel
-- **Base de datos:** Railway (MySQL/MariaDB)
+- **Base de datos:** Supabase (PostgreSQL)
 - **ORM:** Prisma
 
 ## Instalación y ejecución local
@@ -60,7 +60,7 @@ yarn install
 Crea un archivo .env en la raíz del proyecto con:
 
 ```bash
-DATABASE_URL="mysql://USUARIO:CONTRASEÑA@localhost:3306/zustore"
+DATABASE_URL="postgresql://USUARIO:CONTRASEÑA@localhost:5432/zustore"
 ```
 
 4. Genera y aplica la base de datos
@@ -149,6 +149,11 @@ public/                # Imágenes estáticas, placeholder.jpg
 - Favoritos / lista de deseos
 - Notificaciones por email
 - Imágenes de productos en carrito y compras
+
+## Notas sobre la base de datos
+
+- En producción (Vercel), se utiliza la conexión **pooler de Supabase (IPv4)** para evitar errores de red.
+- Es importante incluir `?sslmode=require` en la variable `DATABASE_URL`.
 
 ## Contribuciones
 
